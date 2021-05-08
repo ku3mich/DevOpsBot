@@ -41,6 +41,7 @@ namespace DevOpsBot.Api
         {
             if (env.IsDevelopment())
             {
+                app.UseMiddleware<RequestLoggingMiddleware>();
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DevOpsBot.Api v1"));
