@@ -1,0 +1,15 @@
+<Project>
+    <PropertyGroup>
+        <Authors>Serhii Kuzmychov</Authors>
+        <RepositoryUrl>https://github.com/ku3mich/DevOpsBot</RepositoryUrl>
+        <LangVersion>9.0</LangVersion>
+        <RootNamespace>DevOpsBot</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Update="SonarAnalyzer.CSharp" Version="8.*.*.*">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+</Project>
