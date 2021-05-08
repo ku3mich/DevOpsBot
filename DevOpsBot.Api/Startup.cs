@@ -1,3 +1,6 @@
+using System;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -16,8 +19,12 @@ namespace DevOpsBot.Api
 
         public IConfiguration Configuration { get; }
 
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
-        public static void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddControllers();
@@ -25,10 +32,12 @@ namespace DevOpsBot.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DevOpsBot.Api", Version = "v1" });
             });
+
+            var builder = new ContainerBuilder();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -38,15 +47,9 @@ namespace DevOpsBot.Api
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            //app.UseAuthorization();
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }
 }
